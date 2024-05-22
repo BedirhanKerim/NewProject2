@@ -18,9 +18,7 @@ public class AudioManager : MonoBehaviour
     private int sampleRate = 44100;
     void Start()
     {
-       // audioSource = GetComponent<AudioSource>();
 
-        // Farklı frekans aralıklarında 12 farklı piyano notası
        
         clips[0] = CreatePianoNoteClip(185.00f, 0.5f);   // Fa# (F#3)
         clips[1] = CreatePianoNoteClip(196.00f, 0.5f);   // Sol (G3)
@@ -38,7 +36,6 @@ public class AudioManager : MonoBehaviour
         int sampleLength = Mathf.FloorToInt(sampleRate * duration);
         float[] samples = new float[sampleLength];
         AudioClip audioClip = AudioClip.Create("PianoNote", sampleLength, 1, sampleRate, false);
-
         for (int i = 0; i < sampleLength; i++)
         {
             float t = i / (float)sampleRate;
@@ -52,17 +49,20 @@ public class AudioManager : MonoBehaviour
     public void PlayMusic(bool isCombo=true)
     {
         if (isCombo)
-        {
+        {       
+            comboCount++;
+
                     if (comboCount>7)
                     {
                         comboCount = 7;
                     }
                     audioSource.PlayOneShot(clips[comboCount]);
-                    comboCount++;
         }
         else
         {
             audioSource.PlayOneShot(clips[0]);
+            comboCount = 0;
+
         }
 
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class StackController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class StackController : MonoBehaviour
     private bool _leftOrRightSpawn = false;
     private float _leftOrRightSpawnDistance = 5f;
     public event Action <Transform> StackStopAndCut;
-
+    public bool endGame = false;
     private void Awake()
     {
         Instance = this;
@@ -27,7 +28,7 @@ public class StackController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&&!endGame)
         {
             StopLastStack();
         }
@@ -49,9 +50,7 @@ public class StackController : MonoBehaviour
         {
             _leftOrRightSpawnDistance *= -1;
         }
-
         _leftOrRightSpawn = _leftOrRightSpawn!;
-
         _spawnCount++;
         _spawnPosition = new Vector3(_leftOrRightSpawnDistance, 0, _spawnCount * 3);
       var spawnedStack=   Instantiate(stackPrefab, _spawnPosition, stackPrefab.transform.rotation, parentStackObj);
