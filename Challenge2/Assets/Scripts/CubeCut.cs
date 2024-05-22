@@ -17,7 +17,6 @@ public class CubeCut : MonoBehaviour
         float distance = Vector3.Distance(victim.position, pos);
 
         if (distance >= victim.localScale.x / 2) return false;
-Debug.Log(Mathf.Abs(victim.position.x- oldStack.position.x));
         if (Mathf.Abs(victim.position.x- oldStack.position.x) < 0.4f)
         {
             CreateCenterSide(oldStack, victim);

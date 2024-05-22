@@ -19,4 +19,5 @@ public class GameManager : MonoBehaviour
         StackController.Instance.endGame = true;
         EndGame?.Invoke();
     }
+
 }

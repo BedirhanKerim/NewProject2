@@ -45,25 +45,10 @@ public class AudioManager : MonoBehaviour
         audioClip.SetData(samples, 0);
         return audioClip;
     }
-[NaughtyAttributes.Button()]
     public void PlayMusic(bool isCombo=true)
     {
-        if (isCombo)
-        {       
-            comboCount++;
-
-                    if (comboCount>7)
-                    {
-                        comboCount = 7;
-                    }
-                    audioSource.PlayOneShot(clips[comboCount]);
-        }
-        else
-        {
-            audioSource.PlayOneShot(clips[0]);
-            comboCount = 0;
-
-        }
+        comboCount = isCombo ? Mathf.Min(comboCount + 1, 7) : 0;
+        audioSource.PlayOneShot(clips[comboCount]);
 
     }
    
