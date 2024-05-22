@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StackMember : MonoBehaviour
 { public float speed = 5.0f;
 
     private float _direction;
+    private bool isStop=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,11 @@ public class StackMember : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move();
+        if (!isStop)
+        {
+            Move();
+
+        }
     }
 
     private void Move()
@@ -29,9 +35,10 @@ public class StackMember : MonoBehaviour
     private void Cut(Transform oldStack)
     {
         if (CubeCut.Cut(transform,  oldStack))
-        {
-                    StackController.Instance.StackStopAndCut -= Cut;
-                    Destroy(this.gameObject);
+        {       
+            isStop = true;
+            StackController.Instance.StackStopAndCut -= Cut; 
+            Destroy(this.gameObject);
         }
 
 

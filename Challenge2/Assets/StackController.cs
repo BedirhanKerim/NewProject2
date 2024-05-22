@@ -11,7 +11,7 @@ public class StackController : MonoBehaviour
     public Transform parentStackObj, lastSpawnedStack;
     private float _spawnCount = 0;
     private bool _leftOrRightSpawn = false;
-    private float _leftOrRightSpawnDistance = 10f;
+    private float _leftOrRightSpawnDistance = 5f;
     public event Action <Transform> StackStopAndCut;
 
     private void Awake()

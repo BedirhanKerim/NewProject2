@@ -55,12 +55,15 @@ public class CubeCut : MonoBehaviour
             rightSideObj.AddComponent<Rigidbody>().mass = 100f;
             StackController.Instance.lastSpawnedStack = leftSideObj.transform;
             StackController.Instance.SpawnStack(leftSideObj.transform.localScale.x);
+            CharacterMovement.Instance.wayCenterLocation = leftSideObj.transform.position.x;
         }
         else
         {
             leftSideObj.AddComponent<Rigidbody>().mass = 100f;
             StackController.Instance.lastSpawnedStack = rightSideObj.transform;
             StackController.Instance.SpawnStack(rightSideObj.transform.localScale.x);
+            CharacterMovement.Instance.wayCenterLocation = rightSideObj.transform.position.x;
+
         }
     }
 
