@@ -17,8 +17,8 @@ public class CubeCut : MonoBehaviour
         float distance = Vector3.Distance(victim.position, pos);
 
         if (distance >= victim.localScale.x / 2) return false;
-
-        if (Vector3.Distance(victim.position, oldStack.position) < 3.01f)
+Debug.Log(Mathf.Abs(victim.position.x- oldStack.position.x));
+        if (Mathf.Abs(victim.position.x- oldStack.position.x) < 0.4f)
         {
             CreateCenterSide(oldStack, victim);
             return true;
@@ -38,6 +38,7 @@ public class CubeCut : MonoBehaviour
         centerSideObj.transform.localScale = oldStack.transform.localScale;
         centerSideObj.GetComponent<MeshRenderer>().material = matCenter;
         StackController.Instance.SpawnStack(oldStack.transform.localScale.x);
+        AudioManager.Instance.PlayMusic(true);
     }
 
     private static void CreateCutSides(Transform victim, Vector3 pos, bool leftOrRight)
@@ -56,6 +57,7 @@ public class CubeCut : MonoBehaviour
             StackController.Instance.lastSpawnedStack = leftSideObj.transform;
             StackController.Instance.SpawnStack(leftSideObj.transform.localScale.x);
             CharacterMovement.Instance.wayCenterLocation = leftSideObj.transform.position.x;
+
         }
         else
         {
@@ -65,6 +67,8 @@ public class CubeCut : MonoBehaviour
             CharacterMovement.Instance.wayCenterLocation = rightSideObj.transform.position.x;
 
         }
+        AudioManager.Instance.PlayMusic(false);
+
     }
 
     private static GameObject CreateSide(Vector3 point, Vector3 pos, Vector3 scale, Material mat)
